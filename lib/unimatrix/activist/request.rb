@@ -29,6 +29,24 @@ module Unimatrix::Activist
       response
     end
 
+    def post( path, parameters = {}, body = {} )
+      response = nil
+
+      begin
+        request = Net::HTTP::Post.new(
+          compose_request_path( path, parameters ),
+          { 'Content-Type' =>'application/json' }
+        )
+        request.body = body.to_json
+
+        response = Response.new( @http.request( request ) )
+      rescue Timeout::Error
+        response = nil
+      end
+
+      response
+    end
+
     protected; def compose_request_path( path, parameters = {} )
       parameters        = @default_parameters.merge( parameters.stringify_keys )
       addressable       = Addressable::URI.new

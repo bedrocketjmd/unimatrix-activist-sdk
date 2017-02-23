@@ -14,7 +14,7 @@ module Unimatrix::Activist
         node_object[ :type_name ] = (
           object.respond_to?( :type_name ) ?
             object.type_name :
-            object.class.name.gsub( /Unimatrix::Activist/, '' ).underscore 
+            object.class.name.gsub( /Unimatrix::Activist/, '' ).underscore
         )
         if object.respond_to?( :fields )
           object.fields.each do | name, options |
