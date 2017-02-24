@@ -12,6 +12,7 @@ module Unimatrix::Activist
     field    :destroyed_at
     field    :created_at
     field    :updated_at
+    field    :execute_at
 
     has_many :task
   end
