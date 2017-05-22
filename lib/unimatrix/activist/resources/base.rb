@@ -55,7 +55,11 @@ module Unimatrix::Activist
       self.type_name = self.class.name.gsub( /Unimatrix::Activist::/, '' ).underscore
 
       attributes.each do | key, value |
-        send( "#{ key }=", value ) if respond_to?( "#{ key }=" )
+        if !respond_to?( "#{ key }=" )
+          field( key )
+        end
+
+        send( "#{ key }=", value )
       end
 
       associations.each do | key, value |
@@ -63,6 +67,26 @@ module Unimatrix::Activist
       end
 
       yield self if block_given?
+    end
+
+    def field( name, options = {} )
+      self.fields[ name.to_sym ] = options.merge( name: name )
+
+      class_eval(
+        "def #{ name }(); " +
+        "@#{ name }.is_a?( FalseClass ) ? @#{ name } : (" +
+           "@#{ name } || " +
+             ( options[ :default ].nil? ?
+                "nil" :
+                ( options[ :default ].is_a?( String ) ?
+                    "'#{ options[ :default ] }'" :
+                      "#{ options[ :default ] }" ) ) + ");" +
+        "end;" +
+        " " +
+        "attr_writer :#{ name };",
+        __FILE__,
+        __LINE__
+      )
     end
 
   end
