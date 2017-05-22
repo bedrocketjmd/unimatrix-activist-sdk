@@ -3,6 +3,7 @@ module Unimatrix::Activist
   class Activity < Base
     field    :id
     field    :type_name
+    field   :realm_uuid
     field    :subject_id
     field    :subject_type
     field    :state

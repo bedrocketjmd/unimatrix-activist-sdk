@@ -3,6 +3,7 @@ module Unimatrix::Activist
   class Task < Base
     field   :id
     field   :type_name
+    field   :realm_uuid
     field   :subject_id
     field   :activity_id
     field   :subject_type
