@@ -95,6 +95,10 @@ module Unimatrix::Activist
           if type_name.present? && !Unimatrix::Activist.const_defined?( type_name )
             typed_klass = Class.new( klass )
             klass = Unimatrix::Activist.const_set( type_name , typed_klass )
+          
+          elsif Unimatrix::Activist.const_defined?( type_name )
+            klass = Unimatrix::Activist.const_get( type_name )
+          
           end
 
           if klass.present?
