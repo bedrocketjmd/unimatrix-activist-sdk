@@ -1,3 +1,4 @@
+require "pry"
 module Unimatrix::Activist
 
   class Parser
@@ -80,7 +81,7 @@ module Unimatrix::Activist
       @resources_index[ name ][ key ] ||= begin
 
         # lock the resource index for this name/key combination
-        # note: this prevents Unimatrix::Activist objects that are associated with  
+        # note: this prevents Unimatrix::Activist objects that are associated with
         #       themselves from causing a stack overflow
         return nil if @resource_index_mutex[ name ].include?( key )
         @resource_index_mutex[ name ].push( key )

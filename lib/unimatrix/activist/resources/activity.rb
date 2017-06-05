@@ -15,6 +15,7 @@ module Unimatrix::Activist
     field    :execute_at
 
     has_many :task
+    belongs_to :realm
   end
 
 end
