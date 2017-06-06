@@ -1,4 +1,3 @@
-require "pry"
 module Unimatrix::Activist
 
   class Parser
