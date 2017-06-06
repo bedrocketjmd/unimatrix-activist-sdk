@@ -1,4 +1,3 @@
-require "pry"
 module Unimatrix::Activist
 
   class Base
@@ -38,13 +37,6 @@ module Unimatrix::Activist
       end
 
       def has_many( name, options = {} )
-        define_method name do
-          self.instance_variable_get( "@_#{ name }" ) ||
-          options[ :default ] || []
-        end
-      end
-
-      def belongs_to( name, options = {} )
         define_method name do
           self.instance_variable_get( "@_#{ name }" ) ||
           options[ :default ] || []
