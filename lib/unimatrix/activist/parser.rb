@@ -80,7 +80,7 @@ module Unimatrix::Activist
       @resources_index[ name ][ key ] ||= begin
 
         # lock the resource index for this name/key combination
-        # note: this prevents Unimatrix::Activist objects that are associated with  
+        # note: this prevents Unimatrix::Activist objects that are associated with
         #       themselves from causing a stack overflow
         return nil if @resource_index_mutex[ name ].include?( key )
         @resource_index_mutex[ name ].push( key )
@@ -88,15 +88,19 @@ module Unimatrix::Activist
         result = nil
         resource_attributes = resource_attribute_index[ name ][ key ]
         if resource_attributes.present?
-          type_name = resource_attributes[ 'type_name' ]
-          klass = nil
-          klass = ( Unimatrix::Activist.const_get( type_name.camelize ) rescue nil ) \
-            if type_name.present?
-          if klass.nil?
-            type_name = options[ 'type_name' ]
-            klass = ( Unimatrix::Activist.const_get( type_name.camelize ) rescue nil ) \
-              if type_name.present?
+          type_name = resource_attributes[ 'type_name' ].camelize
+          klass = ( Unimatrix::Activist.const_get( options[ 'type_name' ].camelize ) rescue nil )
+
+          #Create specific class if not already defined
+          if type_name.present? && !Unimatrix::Activist.const_defined?( type_name )
+            typed_klass = Class.new( klass )
+            klass = Unimatrix::Activist.const_set( type_name , typed_klass )
+          
+          elsif Unimatrix::Activist.const_defined?( type_name )
+            klass = Unimatrix::Activist.const_get( type_name )
+          
           end
+
           if klass.present?
             result = klass.new(
               resource_attributes,
