@@ -7,7 +7,6 @@ module Unimatrix::Activist
     field    :subject_type
     field    :state
     field    :message
-    field    :realm
     field    :properties
     field    :completed_at
     field    :destroyed_at
@@ -16,6 +15,7 @@ module Unimatrix::Activist
     field    :execute_at
 
     has_many :task
+    has_one  :realm
   end
 
 end

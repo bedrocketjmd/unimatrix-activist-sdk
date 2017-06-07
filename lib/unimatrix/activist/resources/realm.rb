@@ -1,7 +1,7 @@
 module Unimatrix::Activist
 
   class Realm < Base
-    field :id
+    field :uuid
   end
 
 end
