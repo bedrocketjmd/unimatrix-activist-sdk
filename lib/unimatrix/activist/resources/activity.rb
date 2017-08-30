@@ -14,7 +14,7 @@ module Unimatrix::Activist
     field    :updated_at
     field    :execute_at
 
-    has_many :task
+    has_many :tasks
     has_one  :realm
   end
 
