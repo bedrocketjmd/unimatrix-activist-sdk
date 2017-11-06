@@ -13,5 +13,6 @@ require 'unimatrix/activist/serializer'
 
 require 'unimatrix/activist/resources/base'
 require 'unimatrix/activist/resources/error'
+require 'unimatrix/activist/resources/attribute_error'
 require 'unimatrix/activist/resources/activity'
 require 'unimatrix/activist/resources/task'
