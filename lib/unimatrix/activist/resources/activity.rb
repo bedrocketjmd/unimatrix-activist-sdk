@@ -13,6 +13,7 @@ module Unimatrix::Activist
     field    :created_at
     field    :updated_at
     field    :execute_at
+    field    :expire_at
 
     has_many :tasks
     has_one  :realm

@@ -14,6 +14,7 @@ module Unimatrix::Activist
     field   :ended_at
     field   :created_at
     field   :updated_at
+    field   :expire_at
 
     has_one :activity
   end
